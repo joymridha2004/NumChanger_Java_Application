@@ -167,7 +167,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="@drawable/restart_button_shape"
-        android:text="@string/start"
+        android:text="@string/restart"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:layout_marginTop="80dp"
@@ -179,6 +179,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Result_TV"/>
+
+        <TextView
+            android:id="@+id/version_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/version"
+            android:textColor="#80000000"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
