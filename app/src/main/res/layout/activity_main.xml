@@ -128,19 +128,18 @@
     </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:layout_marginTop="40dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="100dp"
             android:id="@+id/Result_TV"
             android:layout_width="200dp"
             android:layout_height="45dp"
-            tools:ignore="MissingConstraints"
-            app:layout_constraintTop_toBottomOf="@id/enter_After_Changing_Number_System_TInputLayout"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="18sp"
-            android:textColor="@color/black"
+            android:layout_marginTop="40dp"
             android:background="@drawable/text_view_shape"
-            />
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/enter_After_Changing_Number_System_TInputLayout"
+            tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/start_Button"
@@ -194,7 +193,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
-        
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
