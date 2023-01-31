@@ -3,6 +3,7 @@ package com.example.numchanger;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -33,6 +34,9 @@ public class Main_Activity extends AppCompatActivity {
         selectPresentNumberSystemAutoCompleteTV = findViewById(R.id.select_Present_Number_System_Auto_Complete_TV);
         selectAfterChangingNumberSystemAutoCompleteTV = findViewById(R.id.select_After_Changing_Number_System_Auto_Complete_TV);
 
+        start_Button = findViewById(R.id.start_Button);
+        restart_Button = findViewById(R.id.restart_Button);
+
         /* --------------Present_Number_System--------------- */
 
         adapterPresentNumberSystem = new ArrayAdapter<String>(this, R.layout.dropdown, NumberSystem);
@@ -42,5 +46,6 @@ public class Main_Activity extends AppCompatActivity {
 
         adapterChangingNumberSystem = new ArrayAdapter<String>(this, R.layout.dropdown, NumberSystem);
         selectAfterChangingNumberSystemAutoCompleteTV.setAdapter(adapterChangingNumberSystem);
+
     }
 }
