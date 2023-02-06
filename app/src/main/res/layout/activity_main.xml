@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="90dp"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/present_number_system"
             android:textColor="@color/black"
@@ -47,8 +47,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
-                    android:layout_marginEnd="40dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="40dp"
                     android:hint="@string/select_number"
                     app:layout_constraintTop_toBottomOf="@id/present_Number_System_TV"
                     tools:ignore="MissingConstraints">
@@ -194,19 +194,33 @@
         </LinearLayout>
 
 
+        <ImageView
+            android:id="@+id/github_link"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/github"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
-            android:id="@+id/version_TV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="40dp"
-            android:fontFamily="@font/poppins_regular"
+            android:id="@+id/Project_Link"
+            android:layout_width="160dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/text_view_shape"
+            android:gravity="center"
+            android:padding="2dp"
             android:text="@string/version"
-            android:textColor="#80000000"
+            android:textColor="@color/black"
             android:textSize="12sp"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
