@@ -89,6 +89,7 @@
                         android:inputType="text"
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
 
         </LinearLayout>
@@ -138,6 +139,7 @@
                     android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
 
@@ -148,6 +150,7 @@
             android:layout_marginTop="70dp"
             android:background="@drawable/text_view_shape"
             android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -167,7 +170,7 @@
             tools:ignore="MissingConstraints">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/start_Button"
+                android:id="@+id/convert_Button"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -175,7 +178,7 @@
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/start_button_shape"
                 android:elevation="20dp"
-                android:text="@string/start"
+                android:text="@string/convert"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 

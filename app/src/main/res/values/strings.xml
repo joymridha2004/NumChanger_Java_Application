@@ -3,8 +3,8 @@
     <string name="present_number_system">Present Number System</string>
     <string name="after_changing_number_system">After Changing Number System</string>
     <string name="enter_number">Enter Number</string>
-    <string name="start">Start</string>
+    <string name="convert">Convert</string>
     <string name="restart">Restart</string>
     <string name="select_number">Select Number System</string>
-    <string name="version">NumChanger_V_0.0.03</string>
+    <string name="version">NumChanger_V_0.0.05</string>
 </resources>
