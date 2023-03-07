@@ -84,10 +84,12 @@
                         android:id="@+id/enter_Present_Number_System_Text_Input_EditT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
+                        android:fontFamily="@font/roboto_medium"
                         android:gravity="top"
                         android:inputType="text"
+                        android:maxLength="25"
                         android:textColor="@color/black" />
+
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -142,6 +144,19 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/Result_status_TV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/result"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Layout2"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/Result_TV"
@@ -202,10 +217,20 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             android:src="@drawable/github"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/update_IV"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="36dp"
+            android:src="@drawable/update"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -213,7 +238,7 @@
             android:layout_width="160dp"
             android:layout_height="25dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="25dp"
             android:background="@drawable/text_view_shape"
             android:gravity="center"

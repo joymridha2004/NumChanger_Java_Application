@@ -1,5 +1,7 @@
 package com.example.numchanger;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -7,8 +9,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -19,7 +19,8 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.Objects;
+import org.jetbrains.annotations.Contract;
+
 
 public class Main_Activity extends AppCompatActivity {
 
@@ -53,6 +54,7 @@ public class Main_Activity extends AppCompatActivity {
         /*<------------Night mode disable--------->*/
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         /* --------------Hooks--------------- */
 
@@ -108,16 +110,16 @@ public class Main_Activity extends AppCompatActivity {
                 AfterChangingNumberSystemAutoCompleteTV = selectAfterChangingNumberSystemAutoCompleteTV.getText().toString();
                 Present_Number_System_Text_Input_EditT = enter_Present_Number_System_Text_Input_EditT.getText().toString();
 
-                if (!Present_Number_System_Text_Input_EditT.isEmpty()) {
+                if (!Present_Number_System_Text_Input_EditT.isEmpty() && Present_Number_System_Text_Input_EditT.length() <= 25) {
                     switch (PresentNumberSystemAutoCompleteTV) {
                         case "Binary": {
                             switch (AfterChangingNumberSystemAutoCompleteTV) {
                                 case "Binary": {
 
-                                    if(Bi_Format(Present_Number_System_Text_Input_EditT)) {
+                                    if (Bi_Format(Present_Number_System_Text_Input_EditT)) {
                                         Toast.makeText(getApplicationContext(), "Same Data type!!!", Toast.LENGTH_SHORT).show();
                                         Result_TV.setText(Present_Number_System_Text_Input_EditT);
-                                    }else{
+                                    } else {
                                         Result_TV.setText(null);
                                     }
                                     break;
@@ -127,11 +129,11 @@ public class Main_Activity extends AppCompatActivity {
                                     break;
                                 }
                                 case "Octal": {
-                                    Toast.makeText(getApplicationContext(), "Binary to Octal", Toast.LENGTH_SHORT).show();
+                                    Result_TV.setText(Bi_to_Oc(Present_Number_System_Text_Input_EditT));
                                     break;
                                 }
                                 case "Hexadecimal": {
-                                    Toast.makeText(getApplicationContext(), "Binary to Hexadecimal", Toast.LENGTH_SHORT).show();
+                                    Result_TV.setText(Bi_to_HeDe(Present_Number_System_Text_Input_EditT));
                                     break;
                                 }
                                 case "": {
@@ -144,19 +146,24 @@ public class Main_Activity extends AppCompatActivity {
                         case "Decimal": {
                             switch (AfterChangingNumberSystemAutoCompleteTV) {
                                 case "Binary": {
-                                    Toast.makeText(getApplicationContext(), "Decimal to Binary", Toast.LENGTH_SHORT).show();
+                                    Result_TV.setText(De_to_Bi(Present_Number_System_Text_Input_EditT));
                                     break;
                                 }
                                 case "Decimal": {
-                                    Toast.makeText(getApplicationContext(), "Same Data type!!!", Toast.LENGTH_SHORT).show();
+                                    if (De_Format(Present_Number_System_Text_Input_EditT)) {
+                                        Toast.makeText(getApplicationContext(), "Same Data type!!!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(Present_Number_System_Text_Input_EditT);
+                                    } else {
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "Octal": {
-                                    Toast.makeText(getApplicationContext(), "Decimal to Octal", Toast.LENGTH_SHORT).show();
+                                    Result_TV.setText(De_to_Oc(Present_Number_System_Text_Input_EditT));
                                     break;
                                 }
                                 case "Hexadecimal": {
-                                    Toast.makeText(getApplicationContext(), "Decimal to Hexadecimal", Toast.LENGTH_SHORT).show();
+                                    Result_TV.setText(De_to_HeDe(Present_Number_System_Text_Input_EditT));
                                     break;
                                 }
                                 case "": {
@@ -225,7 +232,7 @@ public class Main_Activity extends AppCompatActivity {
                             break;
                         }
                     }
-                }else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Enter Number", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -234,6 +241,7 @@ public class Main_Activity extends AppCompatActivity {
         restart_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                selectPresentNumberSystemAutoCompleteTV.getText();
                 selectPresentNumberSystemAutoCompleteTV.setText(null);
                 selectAfterChangingNumberSystemAutoCompleteTV.setText(null);
                 enter_Present_Number_System_Text_Input_EditT.setText(null);
@@ -241,6 +249,157 @@ public class Main_Activity extends AppCompatActivity {
                 selectPresentNumberSystemAutoCompleteTV.requestFocus();
             }
         });
+    }
+
+    @Nullable
+    private String De_to_HeDe(String num) {
+        if (De_Format(num)) {
+            String HexaDec = dec_to_HexaDec(Integer.parseInt(num));
+            return HexaDec;
+        }
+        return null;
+    }
+
+    @Nullable
+    private String De_to_Oc(String num) {
+        if (De_Format(num)) {
+            String octal = String.valueOf(dec_to_octal(Integer.parseInt(num)));
+            return octal;
+        }
+        return null;
+    }
+
+    @Nullable
+    private String De_to_Bi(String num) {
+        if (De_Format(num)) {
+            String Binary;
+            return Binary = "" + dec_to_Bi(Integer.parseInt(num));
+        }
+        return null;
+    }
+
+    @NonNull
+    private static String dec_to_Bi(int Dec) {
+        String Binary = "";
+        while (Dec != 0) {
+            Binary = Binary + Dec % 2;
+            Dec /= 2;
+        }
+        Binary = String.valueOf(Reverse_String(Binary));
+        return Binary;
+    }
+
+    @Nullable
+    private String Bi_to_HeDe(String num) {
+        if (Bi_Format(num)) {
+            int Dec = Integer.parseInt(num, 2);
+            String HexaDec = dec_to_HexaDec(Dec);
+            return HexaDec;
+        }
+        return null;
+    }
+
+    @NonNull
+    private static String dec_to_HexaDec(int dec) {
+        String HexaDec = "";
+        while (dec != 0) {
+            HexaDec = HexaDec + Remainder(dec % 16);
+            dec /= 16;
+        }
+        HexaDec = String.valueOf(Reverse_String(HexaDec));
+        return HexaDec;
+    }
+
+    private static String Reverse_String(@NonNull String string) {
+        String nstr = "";
+        char ch;
+        for (int i = 0; i < string.length(); i++) {
+            ch = string.charAt(i); //extracts each character
+            nstr = ch + nstr; //adds each character in front of the existing string
+        }
+        return nstr;
+    }
+
+    @Nullable
+    @Contract(pure = true)
+    private static String Remainder(int i) {
+        switch (i) {
+            case 1: {
+                return "1";
+            }
+            case 2: {
+                return "2";
+            }
+            case 3: {
+                return "3";
+            }
+            case 4: {
+                return "4";
+            }
+            case 5: {
+                return "5";
+            }
+            case 6: {
+                return "6";
+            }
+            case 7: {
+                return "7";
+            }
+            case 8: {
+                return "8";
+            }
+            case 9: {
+                return "9";
+            }
+            case 10: {
+                return "A";
+            }
+            case 11: {
+                return "B";
+            }
+            case 12: {
+                return "C";
+            }
+            case 13: {
+                return "D";
+            }
+            case 14: {
+                return "E";
+            }
+            case 15: {
+                return "F";
+            }
+        }
+        return null;
+    }
+
+    @Nullable
+    private String Bi_to_Oc(String num) {
+        if (Bi_Format(num)) {
+            int Dec = Integer.parseInt(num, 2);
+            int octal = dec_to_octal(Dec);
+            return ("" + octal);
+        }
+        return null;
+    }
+
+    private static int dec_to_octal(int Dec) {
+        int octal = 0;
+        while (Dec != 0) {
+            octal = octal * 10 + (Dec % 8);
+            Dec /= 8;
+        }
+        octal = Reverse_Number(octal);
+        return octal;
+    }
+
+    private static int Reverse_Number(int Num) {
+        int rev = 0;
+        while (Num != 0) {
+            rev = rev * 10 + (Num % 10);
+            Num /= 10;
+        }
+        return rev;
     }
 
     public String Bi_to_de(String num) {
@@ -251,13 +410,33 @@ public class Main_Activity extends AppCompatActivity {
         return null;
     }
 
-    private boolean Bi_Format(String num) {
+    private boolean Bi_Format(@NonNull String num) {
         String result = num.replace("1", "");
         result = result.replace("0", "");
         if (result.isEmpty()) {
             return true;
         }
         Toast.makeText(getApplicationContext(), "Fill Binary Number", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    private boolean De_Format(@NonNull String num) {
+        String result;
+
+        result = num.replace("0", "");
+        result = result.replace("1", "");
+        result = result.replace("2", "");
+        result = result.replace("3", "");
+        result = result.replace("4", "");
+        result = result.replace("5", "");
+        result = result.replace("6", "");
+        result = result.replace("7", "");
+        result = result.replace("8", "");
+        result = result.replace("9", "");
+        if (result.isEmpty()) {
+            return true;
+        }
+        Toast.makeText(getApplicationContext(), "Fill Decimal Number", Toast.LENGTH_SHORT).show();
         return false;
     }
 
