@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,11 +42,15 @@ public class Main_Activity extends AppCompatActivity {
 
     TextView Project_Link, Result_TV;
 
-    ImageView github_link;
+    ImageView github_link, update_IV;
 
     static String PresentNumberSystemAutoCompleteTV;
     static String AfterChangingNumberSystemAutoCompleteTV;
     static String Present_Number_System_Text_Input_EditT;
+
+    /* --------------Quit_DialogBox--------------- */
+
+    Button BackButton;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -55,6 +61,14 @@ public class Main_Activity extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+        /* --------------DialogBox Creation--------------- */
+
+        Dialog UpdateDialog = new Dialog(this);
+        UpdateDialog.setContentView(R.layout.update_dialog_box);
+
+        /*---------------Hooks Quit DialogBox--------------->*/
+
+        BackButton = UpdateDialog.findViewById(R.id.Back_Button);
 
         /* --------------Hooks--------------- */
 
@@ -69,6 +83,7 @@ public class Main_Activity extends AppCompatActivity {
         enter_Present_Number_System_Text_Input_EditT = findViewById(R.id.enter_Present_Number_System_Text_Input_EditT);
 
         Result_TV = findViewById(R.id.Result_TV);
+        update_IV = findViewById(R.id.update_IV);
 
         /*<------------Handle_Github_link_On_click_Listener--------->*/
 
@@ -90,6 +105,24 @@ public class Main_Activity extends AppCompatActivity {
             }
         });
 
+        /*<------------Handle_back_Button_On_click_Listener--------->*/
+
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UpdateDialog.dismiss();
+            }
+        });
+
+        /*<------------Handle_Update_Button_On_click_Listener--------->*/
+
+        update_IV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UpdateDialog.show();
+            }
+        });
+
         /* --------------Present_Number_System--------------- */
 
         adapterPresentNumberSystem = new ArrayAdapter<String>(this, R.layout.dropdown, NumberSystem);
@@ -100,7 +133,7 @@ public class Main_Activity extends AppCompatActivity {
         adapterChangingNumberSystem = new ArrayAdapter<String>(this, R.layout.dropdown, NumberSystem);
         selectAfterChangingNumberSystemAutoCompleteTV.setAdapter(adapterChangingNumberSystem);
 
-        /* --------------Get_Number_System--------------- */
+        /* --------------Get_and_Set_Number_System--------------- */
 
         convert_Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,23 +150,45 @@ public class Main_Activity extends AppCompatActivity {
                                 case "Binary": {
 
                                     if (Bi_Format(Present_Number_System_Text_Input_EditT)) {
-                                        Toast.makeText(getApplicationContext(), "Same Data type!!!", Toast.LENGTH_SHORT).show();
-                                        Result_TV.setText(Present_Number_System_Text_Input_EditT);
+                                        try {
+                                            Toast.makeText(getApplicationContext(), "Same Data type!!!", Toast.LENGTH_SHORT).show();
+                                            Result_TV.setText(Present_Number_System_Text_Input_EditT);
+                                        } catch (Exception e) {
+                                            Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        }
+
                                     } else {
                                         Result_TV.setText(null);
                                     }
                                     break;
                                 }
                                 case "Decimal": {
-                                    Result_TV.setText(Bi_to_de(Present_Number_System_Text_Input_EditT));
+                                    try {
+                                        Result_TV.setText(Bi_to_de(Present_Number_System_Text_Input_EditT));
+                                        break;
+                                    } catch (Exception e) {
+                                        Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "Octal": {
-                                    Result_TV.setText(Bi_to_Oc(Present_Number_System_Text_Input_EditT));
+                                    try {
+                                        Result_TV.setText(Bi_to_Oc(Present_Number_System_Text_Input_EditT));
+                                    } catch (Exception e) {
+                                        Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "Hexadecimal": {
-                                    Result_TV.setText(Bi_to_HeDe(Present_Number_System_Text_Input_EditT));
+                                    try {
+                                        Result_TV.setText(Bi_to_HeDe(Present_Number_System_Text_Input_EditT));
+
+                                    } catch (Exception e) {
+                                        Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "": {
@@ -146,24 +201,47 @@ public class Main_Activity extends AppCompatActivity {
                         case "Decimal": {
                             switch (AfterChangingNumberSystemAutoCompleteTV) {
                                 case "Binary": {
-                                    Result_TV.setText(De_to_Bi(Present_Number_System_Text_Input_EditT));
+                                    try {
+                                        Result_TV.setText(De_to_Bi(Present_Number_System_Text_Input_EditT));
+
+                                    } catch (Exception e) {
+                                        Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "Decimal": {
                                     if (De_Format(Present_Number_System_Text_Input_EditT)) {
-                                        Toast.makeText(getApplicationContext(), "Same Data type!!!", Toast.LENGTH_SHORT).show();
-                                        Result_TV.setText(Present_Number_System_Text_Input_EditT);
+                                        try {
+                                            Toast.makeText(getApplicationContext(), "Same Data type!!!", Toast.LENGTH_SHORT).show();
+                                            Result_TV.setText(Present_Number_System_Text_Input_EditT);
+                                        } catch (Exception e) {
+                                            Toast.makeText(getApplicationContext(), "" + e, Toast.LENGTH_SHORT).show();
+                                        }
+
                                     } else {
                                         Result_TV.setText(null);
                                     }
                                     break;
                                 }
                                 case "Octal": {
-                                    Result_TV.setText(De_to_Oc(Present_Number_System_Text_Input_EditT));
+                                    try {
+                                        Result_TV.setText(De_to_Oc(Present_Number_System_Text_Input_EditT));
+
+                                    } catch (Exception e) {
+                                        Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "Hexadecimal": {
-                                    Result_TV.setText(De_to_HeDe(Present_Number_System_Text_Input_EditT));
+                                    try {
+                                        Result_TV.setText(De_to_HeDe(Present_Number_System_Text_Input_EditT));
+
+                                    } catch (Exception e) {
+                                        Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "": {
@@ -370,36 +448,26 @@ public class Main_Activity extends AppCompatActivity {
                 return "F";
             }
         }
-        return null;
+        return "";
     }
 
     @Nullable
     private String Bi_to_Oc(String num) {
         if (Bi_Format(num)) {
             int Dec = Integer.parseInt(num, 2);
-            int octal = dec_to_octal(Dec);
-            return ("" + octal);
+            return ("" + dec_to_octal(Dec));
         }
         return null;
     }
 
-    private static int dec_to_octal(int Dec) {
-        int octal = 0;
+    private static String dec_to_octal(int Dec) {
+        String Octal = "";
         while (Dec != 0) {
-            octal = octal * 10 + (Dec % 8);
+            Octal = Octal + Dec % 8;
             Dec /= 8;
         }
-        octal = Reverse_Number(octal);
-        return octal;
-    }
-
-    private static int Reverse_Number(int Num) {
-        int rev = 0;
-        while (Num != 0) {
-            rev = rev * 10 + (Num % 10);
-            Num /= 10;
-        }
-        return rev;
+        Octal = String.valueOf(Reverse_String(Octal));
+        return Octal;
     }
 
     public String Bi_to_de(String num) {
