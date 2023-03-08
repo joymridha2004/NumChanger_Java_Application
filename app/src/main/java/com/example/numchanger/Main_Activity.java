@@ -1,5 +1,7 @@
 package com.example.numchanger;
 
+import static java.lang.Math.pow;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,8 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.Contract;
+
+import java.util.Locale;
 
 
 public class Main_Activity extends AppCompatActivity {
@@ -164,6 +168,7 @@ public class Main_Activity extends AppCompatActivity {
                                 }
                                 case "Decimal": {
                                     try {
+                                        Result_TV.setTextSize(Result_Size(Bi_to_de(Present_Number_System_Text_Input_EditT)));
                                         Result_TV.setText(Bi_to_de(Present_Number_System_Text_Input_EditT));
                                         break;
                                     } catch (Exception e) {
@@ -174,6 +179,7 @@ public class Main_Activity extends AppCompatActivity {
                                 }
                                 case "Octal": {
                                     try {
+                                        Result_TV.setTextSize(Result_Size(Bi_to_Oc(Present_Number_System_Text_Input_EditT)));
                                         Result_TV.setText(Bi_to_Oc(Present_Number_System_Text_Input_EditT));
                                     } catch (Exception e) {
                                         Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
@@ -183,8 +189,8 @@ public class Main_Activity extends AppCompatActivity {
                                 }
                                 case "Hexadecimal": {
                                     try {
+                                        Result_TV.setTextSize(Result_Size(Bi_to_HeDe(Present_Number_System_Text_Input_EditT)));
                                         Result_TV.setText(Bi_to_HeDe(Present_Number_System_Text_Input_EditT));
-
                                     } catch (Exception e) {
                                         Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
                                         Result_TV.setText(null);
@@ -202,8 +208,8 @@ public class Main_Activity extends AppCompatActivity {
                             switch (AfterChangingNumberSystemAutoCompleteTV) {
                                 case "Binary": {
                                     try {
+                                        Result_TV.setTextSize(Result_Size(De_to_Bi(Present_Number_System_Text_Input_EditT)));
                                         Result_TV.setText(De_to_Bi(Present_Number_System_Text_Input_EditT));
-
                                     } catch (Exception e) {
                                         Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
                                         Result_TV.setText(null);
@@ -216,7 +222,7 @@ public class Main_Activity extends AppCompatActivity {
                                             Toast.makeText(getApplicationContext(), "Same Data type!!!", Toast.LENGTH_SHORT).show();
                                             Result_TV.setText(Present_Number_System_Text_Input_EditT);
                                         } catch (Exception e) {
-                                            Toast.makeText(getApplicationContext(), "" + e, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
                                         }
 
                                     } else {
@@ -226,8 +232,8 @@ public class Main_Activity extends AppCompatActivity {
                                 }
                                 case "Octal": {
                                     try {
+                                        Result_TV.setTextSize(Result_Size(De_to_Oc(Present_Number_System_Text_Input_EditT)));
                                         Result_TV.setText(De_to_Oc(Present_Number_System_Text_Input_EditT));
-
                                     } catch (Exception e) {
                                         Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
                                         Result_TV.setText(null);
@@ -236,8 +242,8 @@ public class Main_Activity extends AppCompatActivity {
                                 }
                                 case "Hexadecimal": {
                                     try {
+                                        Result_TV.setTextSize(Result_Size(De_to_HeDe(Present_Number_System_Text_Input_EditT)));
                                         Result_TV.setText(De_to_HeDe(Present_Number_System_Text_Input_EditT));
-
                                     } catch (Exception e) {
                                         Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
                                         Result_TV.setText(null);
@@ -254,19 +260,47 @@ public class Main_Activity extends AppCompatActivity {
                         case "Octal": {
                             switch (AfterChangingNumberSystemAutoCompleteTV) {
                                 case "Binary": {
-                                    Toast.makeText(getApplicationContext(), "Octal to Binary", Toast.LENGTH_SHORT).show();
+                                    try {
+                                        Result_TV.setTextSize(Result_Size(Oc_to_Bi(Present_Number_System_Text_Input_EditT)));
+                                        Result_TV.setText(Oc_to_Bi(Present_Number_System_Text_Input_EditT));
+                                    } catch (Exception e) {
+                                        Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "Decimal": {
-                                    Toast.makeText(getApplicationContext(), "Octal to Decimal", Toast.LENGTH_SHORT).show();
+                                    try {
+                                        Result_TV.setTextSize(Result_Size(Oc_to_De(Present_Number_System_Text_Input_EditT)));
+                                        Result_TV.setText(Oc_to_De(Present_Number_System_Text_Input_EditT));
+                                    } catch (Exception e) {
+                                        Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "Octal": {
-                                    Toast.makeText(getApplicationContext(), "Same Data type!!!", Toast.LENGTH_SHORT).show();
+                                    if (Oc_Format(Present_Number_System_Text_Input_EditT)) {
+                                        try {
+                                            Toast.makeText(getApplicationContext(), "Same Data type!!!", Toast.LENGTH_SHORT).show();
+                                            Result_TV.setText(Present_Number_System_Text_Input_EditT);
+                                        } catch (Exception e) {
+                                            Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    } else {
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "Hexadecimal": {
-                                    Toast.makeText(getApplicationContext(), "Octal to Hexadecimal", Toast.LENGTH_SHORT).show();
+                                    try {
+                                        Result_TV.setTextSize(Result_Size(Oc_to_HexaDe(Present_Number_System_Text_Input_EditT)));
+                                        Result_TV.setText(Oc_to_HexaDe(Present_Number_System_Text_Input_EditT));
+                                    } catch (Exception e) {
+                                        Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "": {
@@ -279,19 +313,47 @@ public class Main_Activity extends AppCompatActivity {
                         case "Hexadecimal": {
                             switch (AfterChangingNumberSystemAutoCompleteTV) {
                                 case "Binary": {
-                                    Toast.makeText(getApplicationContext(), "Hexadecimal to Binary", Toast.LENGTH_SHORT).show();
+                                    try {
+                                        Result_TV.setTextSize(Result_Size(He_to_Bi(Present_Number_System_Text_Input_EditT)));
+                                        Result_TV.setText(He_to_Bi(Present_Number_System_Text_Input_EditT));
+                                    } catch (Exception e) {
+                                        Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "Decimal": {
-                                    Toast.makeText(getApplicationContext(), "Hexadecimal to Decimal", Toast.LENGTH_SHORT).show();
+                                    try {
+                                        Result_TV.setTextSize(Result_Size(He_to_De(Present_Number_System_Text_Input_EditT)));
+                                        Result_TV.setText(He_to_De(Present_Number_System_Text_Input_EditT));
+                                    } catch (Exception e) {
+                                        Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "Octal": {
-                                    Toast.makeText(getApplicationContext(), "Hexadecimal to Octal", Toast.LENGTH_SHORT).show();
+                                    try {
+                                        Result_TV.setTextSize(Result_Size(He_to_Oc(Present_Number_System_Text_Input_EditT)));
+                                        Result_TV.setText(He_to_Oc(Present_Number_System_Text_Input_EditT));
+                                    } catch (Exception e) {
+                                        Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "Hexadecimal": {
-                                    Toast.makeText(getApplicationContext(), "Same Data type!!!", Toast.LENGTH_SHORT).show();
+                                    if (HeDe_Format(Present_Number_System_Text_Input_EditT)) {
+                                        try {
+                                            Toast.makeText(getApplicationContext(), "Same Data type!!!", Toast.LENGTH_SHORT).show();
+                                            Result_TV.setText(Present_Number_System_Text_Input_EditT.toUpperCase(Locale.ROOT));
+                                        } catch (Exception e) {
+                                            Toast.makeText(getApplicationContext(), "it's very big number!", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    } else {
+                                        Result_TV.setText(null);
+                                    }
                                     break;
                                 }
                                 case "": {
@@ -327,6 +389,136 @@ public class Main_Activity extends AppCompatActivity {
                 selectPresentNumberSystemAutoCompleteTV.requestFocus();
             }
         });
+    }
+
+    private String He_to_Oc(String num) {
+        if (HeDe_Format(num)) {
+            String dec = He_to_De(num);
+            return De_to_Oc(dec);
+        }
+        return null;
+    }
+
+    private String He_to_De(String num) {
+        num = num.toUpperCase(Locale.forLanguageTag(num));
+        if (HeDe_Format(num)) {
+            int i = 0;
+            int dec = 0;
+            while (num.length() != 0) {
+                dec = dec + Remainder1(String.valueOf(num.charAt(num.length() - 1))) * (int) pow(16, i);
+                if (num.length() != 0) {
+                    num = num.substring(0, num.length() - 1);
+                    i++;
+                }
+
+            }
+            return dec + "";
+        }
+        return null;
+    }
+
+    private String He_to_Bi(String num) {
+        if (HeDe_Format(num)) {
+            String dec = He_to_De(num);
+            return De_to_Bi(dec);
+        }
+        return null;
+    }
+
+    private static int Remainder1(String i) {
+        switch (i) {
+            case "1": {
+                return 1;
+            }
+            case "2": {
+                return 2;
+            }
+            case "3": {
+                return 3;
+            }
+            case "4": {
+                return 4;
+            }
+            case "5": {
+                return 5;
+            }
+            case "6": {
+                return 6;
+            }
+            case "7": {
+                return 7;
+            }
+            case "8": {
+                return 8;
+            }
+            case "9": {
+                return 9;
+            }
+            case "A": {
+                return 10;
+            }
+            case "B": {
+                return 11;
+            }
+            case "C": {
+                return 12;
+            }
+            case "D": {
+                return 13;
+            }
+            case "E": {
+                return 14;
+            }
+            case "F": {
+                return 15;
+            }
+        }
+        return 0;
+    }
+
+    private String Oc_to_HexaDe(String num) {
+        if (Oc_Format(num)) {
+
+            int i = 0;
+            int dec = 0, octal = Integer.parseInt(num);
+            while (octal != 0) {
+                dec = dec + ((octal % 10) * (int) pow(8, i));
+                octal /= 10;
+                i++;
+            }
+            return De_to_HeDe(String.valueOf(dec));
+        }
+        return null;
+    }
+
+    private String Oc_to_De(String num) {
+        if (Oc_Format(num)) {
+
+            int i = 0;
+            int dec = 0, octal = Integer.parseInt(num);
+            while (octal != 0) {
+                dec = dec + ((octal % 10) * (int) pow(8, i));
+                octal /= 10;
+                i++;
+            }
+            return String.valueOf(dec);
+        }
+        return null;
+    }
+
+    private String Oc_to_Bi(String num) {
+        if (Oc_Format(num)) {
+
+            int i = 0;
+            int dec = 0, octal = Integer.parseInt(num);
+            while (octal != 0) {
+                dec = dec + ((octal % 10) * (int) pow(8, i));
+                octal /= 10;
+                i++;
+            }
+            return De_to_Bi(String.valueOf(dec));
+        }
+        return null;
     }
 
     @Nullable
@@ -470,7 +662,7 @@ public class Main_Activity extends AppCompatActivity {
         return Octal;
     }
 
-    public String Bi_to_de(String num) {
+    private String Bi_to_de(String num) {
         if (Bi_Format(num)) {
             int result = Integer.parseInt(num, 2);
             return ("" + result);
@@ -506,6 +698,62 @@ public class Main_Activity extends AppCompatActivity {
         }
         Toast.makeText(getApplicationContext(), "Fill Decimal Number", Toast.LENGTH_SHORT).show();
         return false;
+    }
+
+    private boolean Oc_Format(@NonNull String num) {
+        String result;
+
+        result = num.replace("0", "");
+        result = result.replace("1", "");
+        result = result.replace("2", "");
+        result = result.replace("3", "");
+        result = result.replace("4", "");
+        result = result.replace("5", "");
+        result = result.replace("6", "");
+        result = result.replace("7", "");
+        if (result.isEmpty()) {
+            return true;
+        }
+        Toast.makeText(getApplicationContext(), "Fill Octal Number", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    private boolean HeDe_Format(@NonNull String num) {
+        String result;
+        num = num.toUpperCase(Locale.forLanguageTag(num));
+
+        result = num.replace("0", "");
+        result = result.replace("1", "");
+        result = result.replace("2", "");
+        result = result.replace("3", "");
+        result = result.replace("4", "");
+        result = result.replace("5", "");
+        result = result.replace("6", "");
+        result = result.replace("7", "");
+        result = result.replace("8", "");
+        result = result.replace("9", "");
+        result = result.replace("A", "");
+        result = result.replace("B", "");
+        result = result.replace("C", "");
+        result = result.replace("D", "");
+        result = result.replace("E", "");
+        result = result.replace("F", "");
+        if (result.isEmpty()) {
+            return true;
+        }
+        Toast.makeText(getApplicationContext(), "Fill HexDecimal Number", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    private int Result_Size(String num) {
+        if (num.length() <= 7) {
+            return 30;
+        } else if (num.length() <= 14) {
+            return 26;
+        } else if (num.length() <= 20) {
+            return 22;
+        }
+        return 18;
     }
 
 }

@@ -87,7 +87,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="top"
                         android:inputType="text"
-                        android:maxLength="25"
+                        android:maxLength="20"
                         android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -153,6 +153,7 @@
             android:text="@string/result"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Layout2"
@@ -160,14 +161,14 @@
 
         <TextView
             android:id="@+id/Result_TV"
-            android:layout_width="200dp"
-            android:layout_height="45dp"
+            android:layout_width="330dp"
+            android:layout_height="60dp"
             android:layout_marginTop="70dp"
             android:background="@drawable/text_view_shape"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/Layout2"
