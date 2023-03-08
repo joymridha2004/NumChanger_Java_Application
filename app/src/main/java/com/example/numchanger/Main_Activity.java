@@ -381,7 +381,6 @@ public class Main_Activity extends AppCompatActivity {
         restart_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectPresentNumberSystemAutoCompleteTV.getText();
                 selectPresentNumberSystemAutoCompleteTV.setText(null);
                 selectAfterChangingNumberSystemAutoCompleteTV.setText(null);
                 enter_Present_Number_System_Text_Input_EditT.setText(null);
@@ -427,6 +426,9 @@ public class Main_Activity extends AppCompatActivity {
 
     private static int Remainder1(String i) {
         switch (i) {
+            case "0": {
+                return 0;
+            }
             case "1": {
                 return 1;
             }
@@ -594,6 +596,9 @@ public class Main_Activity extends AppCompatActivity {
     @Contract(pure = true)
     private static String Remainder(int i) {
         switch (i) {
+            case 0: {
+                return "0";
+            }
             case 1: {
                 return "1";
             }
